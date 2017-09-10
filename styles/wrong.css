@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+}
+
+.wrongperson {
+  margin: auto;
+  width: 400px;
+  height: 300px;
+  /* The background-image is set/overridden in the template file. */
+  background-size: 100%; 
+  text-align: center;
+  position: relative;
+}
+
+.rightperson {
+  margin: auto;
+  width: 400px;
+  height: 300px;
+  background-image: url('../images/trump01.png');
+  background-size: 100%; 
+  text-align: center;
+  position: relative;
+}
+
+.backtoform {
+  /* This places the button in the middle & bottom of the lower panel. */
+  margin: auto;
+  width: 400px;
+  padding-top: 280px;
+  height: 20px;
+}
+
+
+p {
+  position: absolute; 
+  left: 0;
+  right: 0; 
+  margin: 15px 0;
+  padding: 0 5px;
+  font-family: "Lucida Console",Monaco,monospace;
+  font-size: 2em;
+  text-transform: uppercase;
+  text-shadow: 2px 2px #ffffff;
+  color: black;
+  letter-spacing: 1px;
+  -2px -2px 0 #000,
+  2px -2px 0 #000,
+  -2px 2px 0 #000,
+  0px 2px 0 #000,
+  2px 0px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 2px 5px #000;
+}
+
+p.big {
+  position: absolute; 
+  left: 0;
+  right: 0; 
+  margin: 15px 0;
+  padding: 0 5px;
+  font-family: "Lucida Console",Monaco,monospace;
+  font-size: 6em;
+  text-transform: uppercase;
+  color: black;
+  letter-spacing: 1px;
+  -2px -2px 0 #000,
+  2px -2px 0 #000,
+  -2px 2px 0 #000,
+  0px 2px 0 #000,
+  2px 0px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 2px 5px #000;
+}
+
+
+.top {
+   top: 0;
+}
+
