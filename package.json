@@ -11,5 +11,10 @@
     "devDependencies":
     {
 	"jshint":"~2.9.5"
+    },
+    "repository":
+    {
+	"type": "git",
+	"url": "https://github.com/philipb/wrongulator.git"
     }
 }
