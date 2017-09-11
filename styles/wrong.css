@@ -16,7 +16,7 @@
   margin: auto;
   width: 400px;
   height: 300px;
-  background-image: url('../images/trump01.png');
+  /* The background-image is set/overridden in the template file, based on configuration. */
   background-size: 100%; 
   text-align: center;
   position: relative;
@@ -72,10 +72,5 @@ p.big {
   0px -2px 0 #000,
   -2px 0px 0 #000,
   2px 2px 5px #000;
-}
-
-
-.top {
-   top: 0;
 }
 

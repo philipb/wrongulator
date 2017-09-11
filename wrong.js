@@ -15,6 +15,10 @@ const imageLookupTbl = {
     ronda: {
 	pic: "../images/ronda01.jpg",
         title: "Ronda has no idea!"
+    },
+    trump: {
+	pic: "../images/trump01.png",
+	title: "The Donald is wise."
     }
 };
 
@@ -28,7 +32,8 @@ var htmlOut = function(person, statement, cbFunc) {
     var names = Object.getOwnPropertyNames(imageLookupTbl);
     var tmplArgs = null;
     for (var j=0; j < names.length; j++) {
-	if (person.toLowerCase() === names[j]) {
+	// Trump himself can't be wrong, obv.
+	if ((person.toLowerCase() === names[j]) && (names[j]!=='trump')) {
 	    tmplArgs = imageLookupTbl[names[j]];
 	    break;
 	}
@@ -46,6 +51,7 @@ var htmlOut = function(person, statement, cbFunc) {
 	var outStr = templateStr.replace(/XXWRONGTITLEHEREXX/g, tmplArgs.title);
 	outStr = outStr.replace(/XXWRONGFILENAMEHEREXX/g, tmplArgs.pic);
 	outStr = outStr.replace(/XXWRONGSTATEMENTHEREXX/g, wrongText);
+	outStr = outStr.replace(/XXRIGHTFILENAMEHEREXX/g, imageLookupTbl.trump.pic);
 	cbFunc(null, outStr);
     });
 };
@@ -91,9 +97,12 @@ app.get('/wrongform', function(req, res, next) {
 	var options_menu='';
 	var names = Object.getOwnPropertyNames(imageLookupTbl);
 	for (var j=0; j<names.length; j++) {
-	    options_menu = options_menu +
-		'<option value="' + names[j] + '">' +names[j].toUpperCase() +
-		'</option>';
+	    // Trump himself can't be wrong, obv.
+	    if (names[j] !== 'trump') {
+		options_menu = options_menu +
+		    '<option value="' + names[j] + '">' +names[j].toUpperCase() +
+		    '</option>';
+	    }
 	}
 	var outStr = formStr.replace(/XXWRONGOPTIONSHEREXX/g, options_menu);
 	res.send(outStr);
