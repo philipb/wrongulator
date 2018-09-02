@@ -2,39 +2,46 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const pug = require('pug');
 
 const util = require('util');
 const fs = require('fs');
 const querystring = require('querystring');
 
-const imageLookupTbl = {
-    ron: {
-	pic: "../images/ron01.jpg",
-	title: "Weasley is clueless!"
+const config = {
+
+    imageLookupTbl : {
+	ron: {
+	    pic: "../images/ron01.jpg",
+	    title: "Weasley is clueless!"
+	},
+	ronda: {
+	    pic: "../images/ronda01.jpg",
+            title: "Ronda has no idea!"
+	},
+	trump: {
+	    pic: "../images/trump01.png",
+	    title: "The Donald is wise."
+	}
     },
-    ronda: {
-	pic: "../images/ronda01.jpg",
-        title: "Ronda has no idea!"
-    },
-    trump: {
-	pic: "../images/trump01.png",
-	title: "The Donald is wise."
-    }
+    port: 3000,
+    defaultCaption : "You are wrong."
 };
 
-var wrongText="Default text";
+
+var wrongText = config.defaultCaption;
 
 /**
  * Calls back with html output, based on the template content of wrongtemplate.html
  * and the passed parameters (person and statement)
 */
 var htmlOut = function(person, statement, cbFunc) {
-    var names = Object.getOwnPropertyNames(imageLookupTbl);
+    var names = Object.getOwnPropertyNames(config.imageLookupTbl);
     var tmplArgs = null;
     for (var j=0; j < names.length; j++) {
 	// Trump himself can't be wrong, obv.
 	if ((person.toLowerCase() === names[j]) && (names[j]!=='trump')) {
-	    tmplArgs = imageLookupTbl[names[j]];
+	    tmplArgs = config.imageLookupTbl[names[j]];
 	    break;
 	}
     }
@@ -51,13 +58,12 @@ var htmlOut = function(person, statement, cbFunc) {
 	var outStr = templateStr.replace(/XXWRONGTITLEHEREXX/g, tmplArgs.title);
 	outStr = outStr.replace(/XXWRONGFILENAMEHEREXX/g, tmplArgs.pic);
 	outStr = outStr.replace(/XXWRONGSTATEMENTHEREXX/g, wrongText);
-	outStr = outStr.replace(/XXRIGHTFILENAMEHEREXX/g, imageLookupTbl.trump.pic);
+	outStr = outStr.replace(/XXRIGHTFILENAMEHEREXX/g, config.imageLookupTbl.trump.pic);
 	cbFunc(null, outStr);
     });
 };
 
 const app = express();
-
 
 
 app.use('/images', express.static('images'));
@@ -73,7 +79,7 @@ app.get('/tellthemdonald/:person', function(req, res, next) {
     console.log (util.inspect(req.params));
     console.log (util.inspect(req.query));
     if (typeof req.query.claim !== undefined) {
-	wrongText = req.query.claim
+	wrongText = req.query.claim;
     }
     // Load the template, replace it with the values in req.query, and emit the result.    
     htmlOut(req.params.person, wrongText, function(err, output) {
@@ -90,12 +96,12 @@ app.get('/tellthemdonald/:person', function(req, res, next) {
 app.get('/wrongform', function(req, res, next) {
     fs.readFile("wrongform.html", {encoding: 'utf-8'}, function(err, formStr) {
 	if (err) {
-	    cbFunc(err, null);
+	    next(err, null);
 	    return;
 	}
 	//Replace xxwrongoptionsherexx with the set of people given in the configuration
 	var options_menu='';
-	var names = Object.getOwnPropertyNames(imageLookupTbl);
+	var names = Object.getOwnPropertyNames(config.imageLookupTbl);
 	for (var j=0; j<names.length; j++) {
 	    // Trump himself can't be wrong, obv.
 	    if (names[j] !== 'trump') {
@@ -122,6 +128,6 @@ app.post('/getthetruth', function (req, res, next) {
     res.end();
 });
 
-app.listen(3000, function() {
-    console.log ("Listening on port 3000");
+app.listen(config.port, function() {
+    console.log ("Listening on port " + config.port.toString());
 });
