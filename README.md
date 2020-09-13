@@ -49,3 +49,7 @@ const config = {
 ## Run it
 
 A sample bash script to run it is provided in bin/wrongulator.sh
+
+## Daemonize it
+
+Instructions coming soon.
