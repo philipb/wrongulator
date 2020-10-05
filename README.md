@@ -1,4 +1,5 @@
 # wrongulator
+
 A silly webapp to see who is wrong about what
 
 ## Prerequisites
@@ -15,8 +16,8 @@ Edit the `config` section of `wrong.js`; replace all the field values here with 
 * For each entry in `imageLookupTbl`, the following applies:
   * The name of the entry (e.g. 'ron' and 'ronda') is the name of the person as they will appear in the drop-down menu
     * Under that name, `pic` refers to the path of the picture, relative to the wrongulator root path.  In this example, the images directory will be the one in the source tree.  You can place it (the pictures) anywhere you like, as long as pic references it correctly.
-    * for best results, each image should have a 4x3 aspect ratio, and have some room at the top where black text with white shadow to show nicely.
-    * the 'title' field will be the title of the HTML page generated
+    * For best results, each image should have a 4x3 aspect ratio, and have some room at the top where black text with white shadow will show nicely.
+    * The 'title' field will be the title of the HTML page generated.
 * Now make the config true by placing the picture files you are going to use where your config says they are.
 * The port is the port number at which the wrongulator service will listen.
 * The default caption is what will be shown if you do not provide a query.
@@ -49,6 +50,10 @@ const config = {
 ## Run it
 
 A sample bash script to run it is provided in bin/wrongulator.sh
+
+## Use it
+
+Browse to http://my.website.com:<portnumber>/wrongform, where portnumber is the port number you are serving it on -- default is 3000.
 
 ## Daemonize it
 
