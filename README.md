@@ -53,7 +53,7 @@ A sample bash script to run it is provided in bin/wrongulator.sh
 
 ## Use it
 
-Browse to http://my.website.com:&lt;portnumber&gt;/wrongform, where portnumber is the port number you are serving it on -- default is 3000.
+Browse to http://my.website.com:\<portnumber>/wrongform, where portnumber is the port number you are serving it on -- default is 3000.
 
 ## Daemonize it
 
